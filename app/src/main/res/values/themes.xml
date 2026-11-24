@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Base.Theme.Ev_Station"
+        parent="Theme.Material3.DayNight.NoActionBar">
+    </style>
+
+    <style name="Theme.Ev_Station"
+        parent="Base.Theme.Ev_Station">
+    </style>
+
+    <style name="Theme.Ev_Station.Splash"
+        parent="Theme.SplashScreen">
+
+        <item name="windowSplashScreenBackground">
+            @color/splash_background
+        </item>
+
+        <item name="windowSplashScreenAnimatedIcon">
+            @android:color/transparent
+        </item>
+
+        <item name="postSplashScreenTheme">
+            @style/Theme.Ev_Station
+        </item>
+
+    </style>
+
+</resources>
