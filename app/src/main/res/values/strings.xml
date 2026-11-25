@@ -42,4 +42,73 @@
     <string name="desc_filter">Filter stations</string>
     <string name="desc_station">Charging station</string>
 
+
+    <!-- Authentication - Login Screen -->
+    <string name="login_brand_title">EV Station</string>
+    <string name="login_brand_tagline">Find. Book. Charge.</string>
+    <string name="login_welcome_title">Welcome Back</string>
+    <string name="login_subtitle">Sign in to continue your EV journey.</string>
+
+    <!-- Authentication - Input Fields -->
+    <string name="auth_email_hint">Email address</string>
+    <string name="auth_password_hint">Password</string>
+
+    <!-- Authentication - Login Actions -->
+    <string name="login_button">Sign In</string>
+    <string name="login_no_account">Don\'t have an account?</string>
+    <string name="login_register_link">Register</string>
+    <string name="login_loading">Signing in...</string>
+
+    <!-- Authentication - Validation Messages -->
+    <string name="auth_email_required">Email is required</string>
+    <string name="auth_email_invalid">Enter a valid email address</string>
+    <string name="auth_password_required">Password is required</string>
+
+    <!-- Authentication - Accessibility -->
+    <string name="desc_ev_logo">EV charging station logo</string>
+
+    <!-- Authentication - Footer -->
+    <string name="auth_footer">EV Station Finder &amp; Slot Booking</string>
+
+
+    <!-- Authentication - Registration Screen -->
+    <string name="register_title">Create Account</string>
+    <string name="register_subtitle">Start your electric journey with us.</string>
+
+    <!-- Authentication - Registration Input Fields -->
+    <string name="auth_name_hint">Full name</string>
+    <string name="auth_mobile_hint">Mobile number</string>
+    <string name="auth_confirm_password_hint">Confirm password</string>
+
+    <!-- Authentication - Registration Actions -->
+    <string name="register_button">Create Account</string>
+    <string name="register_have_account">Already have an account?</string>
+    <string name="register_login_link">Sign In</string>
+    <string name="register_loading">Creating account...</string>
+
+    <!-- Authentication - Registration Validation -->
+    <string name="auth_name_required">Full name is required</string>
+    <string name="auth_mobile_required">Mobile number is required</string>
+    <string name="auth_mobile_invalid">Enter a valid 10-digit mobile number</string>
+    <string name="auth_password_min_length">Password must contain at least 6 characters</string>
+    <string name="auth_confirm_password_required">Confirm your password</string>
+    <string name="auth_password_mismatch">Passwords do not match</string>
+
+    <!-- Authentication - Registration Navigation -->
+    <string name="auth_back">Back</string>
+    <string name="desc_auth_back">Go back to login</string>
+
+    <!-- Authentication API messages -->
+    <string name="login_success">Login successful</string>
+    <string name="login_invalid_response">Invalid response from server.</string>
+    <string name="login_invalid_credentials">Invalid email or password.</string>
+    <string name="api_network_error">Unable to connect to the server. Please try again.</string>
+    <string name="api_timeout_error">Request timed out. Please try again.</string>
+    <string name="api_unexpected_error">An unexpected error occurred. Please try again.</string>
+
+    <!-- Registration API messages -->
+    <string name="register_success">Account created successfully. Please sign in.</string>
+    <string name="register_invalid_response">Invalid registration response from server.</string>
+    <string name="register_email_exists">Email already registered</string>
+
 </resources>

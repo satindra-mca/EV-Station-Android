@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/registerRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ev_background">
+
+    <!-- Scrollable registration form -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/registerScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"
+        android:overScrollMode="ifContentScrolls"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="24dp">
+
+            <!-- Back navigation -->
+            <TextView
+                android:id="@+id/tvBack"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="start"
+                android:gravity="center_vertical"
+                android:drawablePadding="8dp"
+                android:paddingEnd="12dp"
+                android:background="?attr/selectableItemBackground"
+                android:text="@string/auth_back"
+                android:textColor="@color/ev_primary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="@string/desc_auth_back"
+                app:drawableStartCompat="@drawable/ic_arrow_back" />
+
+            <!-- EV Station logo -->
+            <ImageView
+                android:id="@+id/ivRegisterLogo"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/auth_logo_background"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:contentDescription="@string/desc_ev_logo"
+                app:srcCompat="@drawable/ic_ev_charging" />
+
+            <!-- Brand title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/login_brand_title"
+                android:textColor="@color/ev_primary"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <!-- Brand tagline -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/login_brand_tagline"
+                android:textColor="#626862"
+                android:textSize="14sp" />
+
+            <!-- Registration heading -->
+            <TextView
+                android:id="@+id/tvRegisterTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="@string/register_title"
+                android:textColor="@color/ev_text_primary"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <!-- Registration subtitle -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@string/register_subtitle"
+                android:textColor="#626862"
+                android:textSize="14sp" />
+
+            <!-- Full name input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilName"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:hint="@string/auth_name_hint"
+                app:boxBackgroundColor="@color/ev_surface"
+                app:boxStrokeColor="@color/ev_primary"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:hintTextColor="@color/ev_primary"
+                app:errorTextColor="@color/ev_error"
+                app:startIconDrawable="@drawable/ic_person"
+                app:startIconTint="@color/ev_secondary"
+                app:startIconMinSize="48dp"
+                app:startIconScaleType="centerInside">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etName"
+                    android:paddingStart="56dp"
+                    android:paddingEnd="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="56dp"
+                    android:inputType="textPersonName|textCapWords"
+                    android:imeOptions="actionNext"
+                    android:autofillHints="name"
+                    android:maxLines="1"
+                    android:textColor="@color/ev_text_primary"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Email input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEmail"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/auth_email_hint"
+                app:boxBackgroundColor="@color/ev_surface"
+                app:boxStrokeColor="@color/ev_primary"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:hintTextColor="@color/ev_primary"
+                app:errorTextColor="@color/ev_error"
+                app:startIconDrawable="@drawable/ic_email"
+                app:startIconTint="@color/ev_secondary"
+                app:startIconMinSize="48dp"
+                app:startIconScaleType="centerInside">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
+                    android:paddingStart="56dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="56dp"
+                    android:inputType="textEmailAddress"
+                    android:imeOptions="actionNext"
+                    android:autofillHints="emailAddress"
+                    android:maxLines="1"
+                    android:textColor="@color/ev_text_primary"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Mobile number input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilMobile"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/auth_mobile_hint"
+                app:boxBackgroundColor="@color/ev_surface"
+                app:boxStrokeColor="@color/ev_primary"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:hintTextColor="@color/ev_primary"
+                app:errorTextColor="@color/ev_error"
+                app:startIconDrawable="@drawable/ic_phone"
+                app:startIconTint="@color/ev_secondary"
+                app:startIconMinSize="48dp"
+                app:startIconScaleType="centerInside">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMobile"
+                    android:paddingStart="56dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="56dp"
+                    android:inputType="phone"
+                    android:digits="0123456789"
+                    android:maxLength="10"
+                    android:imeOptions="actionNext"
+                    android:autofillHints="phoneNational"
+                    android:maxLines="1"
+                    android:textColor="@color/ev_text_primary"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Password input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPassword"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/auth_password_hint"
+                app:boxBackgroundColor="@color/ev_surface"
+                app:boxStrokeColor="@color/ev_primary"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:hintTextColor="@color/ev_primary"
+                app:errorTextColor="@color/ev_error"
+                app:startIconDrawable="@drawable/ic_lock"
+                app:startIconTint="@color/ev_secondary"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/ev_text_secondary"
+                app:startIconMinSize="48dp"
+                app:startIconScaleType="centerInside">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassword"
+                    android:paddingStart="56dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="56dp"
+                    android:inputType="textPassword"
+                    android:imeOptions="actionNext"
+                    android:autofillHints="newPassword"
+                    android:saveEnabled="false"
+                    android:maxLines="1"
+                    android:textColor="@color/ev_text_primary"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Confirm password input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilConfirmPassword"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/auth_confirm_password_hint"
+                app:boxBackgroundColor="@color/ev_surface"
+                app:boxStrokeColor="@color/ev_primary"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:hintTextColor="@color/ev_primary"
+                app:errorTextColor="@color/ev_error"
+                app:startIconDrawable="@drawable/ic_lock"
+                app:startIconTint="@color/ev_secondary"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/ev_text_secondary"
+                app:startIconMinSize="48dp"
+                app:startIconScaleType="centerInside">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etConfirmPassword"
+                    android:paddingStart="56dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="56dp"
+                    android:inputType="textPassword"
+                    android:imeOptions="actionDone"
+                    android:autofillHints="newPassword"
+                    android:saveEnabled="false"
+                    android:maxLines="1"
+                    android:textColor="@color/ev_text_primary"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Create account button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/register_button"
+                android:textColor="@color/ev_text_on_primary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:backgroundTint="@color/ev_primary"
+                app:cornerRadius="12dp" />
+
+            <!-- Registration loading indicator -->
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progressRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:indicatorSize="32dp"
+                app:trackThickness="3dp"
+                app:indicatorColor="@color/ev_secondary" />
+
+            <!-- Existing account navigation -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/register_have_account"
+                    android:textColor="#626862"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:gravity="center"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="6dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="@string/register_login_link"
+                    android:textColor="@color/ev_primary"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+            </LinearLayout>
+
+            <!-- Flexible space for larger screens -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <!-- Application footer -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:text="@string/auth_footer"
+                android:textColor="#626862"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Internet permission for REST API communication -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,9 +15,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ev_Station"
         tools:targetApi="31">
+
+        <!-- Login Activity -->
+        <activity
+            android:name=".activity.LoginActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Registation Activity -->
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Home Activity -->
         <activity
             android:name=".activity.HomeActivity"
             android:exported="false" />
+
+        <!-- Splash Activity -->
         <activity
             android:name=".activity.SplashActivity"
             android:exported="true"
@@ -27,7 +46,7 @@
         </activity>
         <activity
             android:name=".activity.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
