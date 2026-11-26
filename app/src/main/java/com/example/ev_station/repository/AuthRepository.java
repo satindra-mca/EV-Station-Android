@@ -1,5 +1,7 @@
 package com.example.ev_station.repository;
 
+import android.content.Context;
+
 import com.example.ev_station.api.ApiClient;
 import com.example.ev_station.api.AuthApi;
 import com.example.ev_station.model.request.LoginRequest;
@@ -20,9 +22,11 @@ public class AuthRepository {
     /**
      * Initializes the authentication API interface.
      */
-    public AuthRepository() {
-        authApi = ApiClient.getClient()
-                .create(AuthApi.class);
+    public AuthRepository(Context context) {
+
+        authApi = ApiClient.getClient(
+                context.getApplicationContext()
+        ).create(AuthApi.class);
     }
 
     /**
@@ -32,6 +36,7 @@ public class AuthRepository {
      * @return Retrofit login call
      */
     public Call<LoginResponse> login(LoginRequest request) {
+
         return authApi.login(request);
     }
 
@@ -44,6 +49,7 @@ public class AuthRepository {
     public Call<RegisterResponse> register(
             RegisterRequest request
     ) {
+
         return authApi.register(request);
     }
 }

@@ -31,6 +31,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import com.example.ev_station.session.SessionManager;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import com.example.ev_station.utils.SessionNavigator;
+
 public class LoginActivity extends AppCompatActivity {
 
     // Input containers
@@ -49,6 +56,13 @@ public class LoginActivity extends AppCompatActivity {
     // Authentication repository
     private AuthRepository authRepository;
 
+    // Secure authentication session manager.
+    private SessionManager sessionManager;
+
+    // Execute session encryption outside the main UI thread.
+    private final ExecutorService sessionExecutor =
+            Executors.newSingleThreadExecutor();
+
     // Active login request
     private Call<LoginResponse> loginCall;
 
@@ -63,7 +77,12 @@ public class LoginActivity extends AppCompatActivity {
         initializeViews();
 
         // Initialize authentication repository.
-        authRepository = new AuthRepository();
+        authRepository = new AuthRepository(this);
+
+        // Initialize secure session management.
+        sessionManager = new SessionManager(
+                getApplicationContext()
+        );
 
         setupListeners();
         setupErrorListeners();
@@ -169,6 +188,7 @@ public class LoginActivity extends AppCompatActivity {
 
         loginCall.enqueue(new Callback<LoginResponse>() {
 
+
             @Override
             public void onResponse(
                     Call<LoginResponse> call,
@@ -176,15 +196,14 @@ public class LoginActivity extends AppCompatActivity {
             ) {
 
                 // Ignore callbacks after Activity destruction.
-                if (call.isCanceled() ||
-                        isFinishing() ||
-                        isDestroyed()) {
+                if (call.isCanceled()
+                        || isFinishing()
+                        || isDestroyed()) {
+
                     return;
                 }
 
                 loginCall = null;
-
-                setLoading(false);
 
                 if (response.isSuccessful()) {
 
@@ -192,9 +211,15 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (isValidLoginResponse(loginResponse)) {
 
+                        /*
+                         * Keep the loading state active until
+                         * secure session storage is completed.
+                         */
                         handleLoginSuccess(loginResponse);
 
                     } else {
+
+                        setLoading(false);
 
                         showMessage(
                                 getString(
@@ -205,9 +230,12 @@ public class LoginActivity extends AppCompatActivity {
 
                 } else {
 
+                    setLoading(false);
+
                     handleApiError(response);
                 }
             }
+
 
             @Override
             public void onFailure(
@@ -251,8 +279,11 @@ public class LoginActivity extends AppCompatActivity {
                 && !response.getRole().trim().isEmpty();
     }
 
+
+
     /**
-     * Handles successful backend authentication.
+     * Persist the authenticated session and navigate
+     * to the dashboard supported by the user role.
      */
     private void handleLoginSuccess(
             LoginResponse response
@@ -261,24 +292,75 @@ public class LoginActivity extends AppCompatActivity {
         // Remove the password from the input field.
         etPassword.setText("");
 
-        showMessage(
-                getString(R.string.login_success)
-        );
+        sessionExecutor.execute(() -> {
 
-        /*
-         * TODO: Step 2.7
-         * Store the JWT and user information securely
-         * using SessionManager.
-         */
+            String role = response.getRole();
 
-        /*
-         * TODO: Step 2.8
-         * Navigate to the appropriate dashboard
-         * according to the authenticated user role.
-         */
+            /*
+             * Only the USER dashboard is currently available.
+             * Do not persist unsupported dashboard sessions.
+             */
+            if (!"USER".equals(role)) {
 
-        // Never log the JWT token or password.
+                runOnUiThread(() -> {
+
+                    if (isFinishing() || isDestroyed()) {
+                        return;
+                    }
+
+                    setLoading(false);
+
+                    showMessage(
+                            getString(
+                                    R.string.dashboard_not_available
+                            )
+                    );
+                });
+
+                return;
+            }
+
+            boolean sessionSaved =
+                    sessionManager.saveSession(
+                            response.getToken(),
+                            response.getUserId(),
+                            response.getName(),
+                            response.getEmail(),
+                            role
+                    );
+
+            runOnUiThread(() -> {
+
+                if (isFinishing() || isDestroyed()) {
+                    return;
+                }
+
+                setLoading(false);
+
+                if (!sessionSaved) {
+
+                    showMessage(
+                            getString(
+                                    R.string.login_session_save_failed
+                            )
+                    );
+
+                    return;
+                }
+
+                showMessage(
+                        getString(R.string.login_success)
+                );
+
+                SessionNavigator.navigateToDashboard(
+                        LoginActivity.this,
+                        role
+                );
+            });
+        });
     }
+
+
 
     /**
      * Handles unsuccessful HTTP responses.
@@ -548,8 +630,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Cancel the active API request when the Activity
-     * is destroyed.
+     * Release authentication resources when the
+     * Activity is destroyed.
      */
     @Override
     protected void onDestroy() {
@@ -559,6 +641,9 @@ public class LoginActivity extends AppCompatActivity {
             loginCall.cancel();
             loginCall = null;
         }
+
+        // Release the executor after submitted tasks finish.
+        sessionExecutor.shutdown();
 
         super.onDestroy();
     }

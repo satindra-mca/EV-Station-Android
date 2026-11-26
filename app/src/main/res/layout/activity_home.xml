@@ -19,17 +19,24 @@
         android:background="#003D32">
 
         <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:id="@+id/ivMenu"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="10dp"
             android:src="@android:drawable/ic_menu_sort_by_size"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/home_menu"
+            android:clickable="true"
+            android:focusable="true"
             app:tint="@android:color/white" />
 
         <TextView
+            android:id="@+id/tvUserGreeting"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginStart="15dp"
-            android:text="Hello, Satindra 👋"
+            android:layout_marginStart="8dp"
+            android:text="@string/home_default_greeting"
             android:textColor="@android:color/white"
             android:textSize="17sp"
             android:textStyle="bold" />

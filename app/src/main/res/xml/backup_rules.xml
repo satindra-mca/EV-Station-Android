@@ -10,4 +10,9 @@
    <include domain="sharedpref" path="."/>
    <exclude domain="sharedpref" path="device.xml"/>
 -->
+    <!-- Exclude encrypted authentication session. -->
+    <exclude
+        domain="sharedpref"
+        path="secure_session.xml" />
+
 </full-backup-content>

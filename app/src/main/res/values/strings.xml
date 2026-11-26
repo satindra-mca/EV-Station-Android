@@ -111,4 +111,23 @@
     <string name="register_invalid_response">Invalid registration response from server.</string>
     <string name="register_email_exists">Email already registered</string>
 
+    <!-- Secure session storage error -->
+    <string name="login_session_save_failed">Unable to save your session securely. Please try again.</string>
+
+    <!-- Dashboard availability message -->
+    <string name="dashboard_not_available">Your account dashboard is not available yet.</string>
+
+    <!-- Home dashboard -->
+    <string name="home_menu">Open menu</string>
+    <string name="home_default_greeting">Hello!</string>
+    <string name="home_user_greeting">Hello, %1$s 👋</string>
+
+    <!-- Logout -->
+    <string name="logout">Logout</string>
+    <string name="logout_title">Confirm Logout</string>
+    <string name="logout_message">Are you sure you want to logout?</string>
+    <string name="logout_cancel">Cancel</string>
+    <string name="logout_success">Logged out successfully.</string>
+    <string name="logout_failed">Unable to clear your session. Please try again.</string>
+
 </resources>

@@ -1,5 +1,9 @@
 package com.example.ev_station.api;
 
+import android.content.Context;
+
+import com.example.ev_station.session.SessionManager;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -22,8 +26,10 @@ public final class ApiClient {
 
     /**
      * Returns the singleton Retrofit instance.
+     *
+     * Application context prevents Activity memory leaks.
      */
-    public static Retrofit getClient() {
+    public static Retrofit getClient(Context context) {
 
         if (retrofit == null) {
 
@@ -31,12 +37,35 @@ public final class ApiClient {
 
                 if (retrofit == null) {
 
+                    Context applicationContext =
+                            context.getApplicationContext();
+
+                    // Initialize secure session management.
+                    SessionManager sessionManager =
+                            new SessionManager(applicationContext);
+
                     // Configure HTTP client.
                     OkHttpClient okHttpClient =
                             new OkHttpClient.Builder()
-                                    .connectTimeout(30, TimeUnit.SECONDS)
-                                    .readTimeout(30, TimeUnit.SECONDS)
-                                    .writeTimeout(30, TimeUnit.SECONDS)
+                                    .connectTimeout(
+                                            30,
+                                            TimeUnit.SECONDS
+                                    )
+                                    .readTimeout(
+                                            30,
+                                            TimeUnit.SECONDS
+                                    )
+                                    .writeTimeout(
+                                            30,
+                                            TimeUnit.SECONDS
+                                    )
+                                    .addInterceptor(
+                                            new AuthInterceptor(
+                                                    sessionManager
+                                            )
+                                    )
+                                    .followRedirects(false)
+                                    .followSslRedirects(false)
                                     .build();
 
                     // Initialize Retrofit.

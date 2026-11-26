@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
         initializeViews();
 
         // Initialize authentication repository.
-        authRepository = new AuthRepository();
+        authRepository = new AuthRepository(this);
 
         setupListeners();
         setupErrorListeners();
