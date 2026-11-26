@@ -159,4 +159,7 @@
     <string name="home_browse_stations_description">Browse charging stations and their locations.</string>
     <string name="nav_stations_with_icon">⚡\nStations</string>
 
+    <string name="nearby_stations_title">Nearby Stations</string>
+    <string name="navigate_back">Navigate back</string>
+
 </resources>

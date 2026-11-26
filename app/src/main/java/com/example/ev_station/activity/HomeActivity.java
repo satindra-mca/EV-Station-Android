@@ -39,6 +39,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView tvViewAllStations;
     private LinearLayout layoutBrowseStations;
     private TextView navStations;
+    private LinearLayout layoutNearbyStations;
 
     // Prevent blocking the main UI thread.
     private final ExecutorService sessionExecutor =
@@ -89,6 +90,9 @@ public class HomeActivity extends AppCompatActivity {
 
         navStations =
                 findViewById(R.id.navStations);
+
+        layoutNearbyStations =
+                findViewById(R.id.layoutNearbyStations);
     }
 
     /**
@@ -110,6 +114,10 @@ public class HomeActivity extends AppCompatActivity {
 
         navStations.setOnClickListener(
                 view -> openStationList()
+        );
+
+        layoutNearbyStations.setOnClickListener(
+                view -> openMap()
         );
     }
 
@@ -216,6 +224,7 @@ public class HomeActivity extends AppCompatActivity {
      */
     private void setDashboardActionsEnabled(
             boolean enabled
+
     ) {
 
         ivMenu.setEnabled(enabled);
@@ -225,8 +234,35 @@ public class HomeActivity extends AppCompatActivity {
         layoutBrowseStations.setEnabled(enabled);
 
         navStations.setEnabled(enabled);
+
+        layoutNearbyStations.setEnabled(enabled);
     }
 
+    /**
+     * Open the charging station map after session validation.
+     */
+    private void openMap() {
+
+        if (!isSessionValid
+                || isLoggingOut
+                || isOpeningStations
+                || isFinishing()
+                || isDestroyed()) {
+
+            return;
+        }
+
+        isOpeningStations = true;
+
+        setDashboardActionsEnabled(false);
+
+        Intent intent = new Intent(
+                HomeActivity.this,
+                MapActivity.class
+        );
+
+        startActivity(intent);
+    }
     /**
      * Open the charging station list.
      *
