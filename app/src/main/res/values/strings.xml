@@ -130,4 +130,33 @@
     <string name="logout_success">Logged out successfully.</string>
     <string name="logout_failed">Unable to clear your session. Please try again.</string>
 
+
+    <!-- Charging station list -->
+    <string name="station_unknown_operator">Unknown operator</string>
+    <string name="station_location_unavailable">Location unavailable</string>
+    <string name="station_address_unavailable">Address unavailable</string>
+    <string name="station_active">Active station</string>
+    <string name="station_inactive">Inactive station</string>
+    <string name="station_status_unknown">Status unknown</string>
+    <string name="station_ownership_unknown">Not specified</string>
+
+
+    <!-- Charging station screen -->
+    <string name="station_list_title">Charging Stations</string>
+    <string name="desc_station_list_back">Go back to home</string>
+    <string name="station_list_count">%1$d charging stations found</string>
+
+
+    <!-- Charging station API messages -->
+    <string name="station_access_denied">You do not have permission to access charging stations.</string>
+    <string name="station_unauthorized">Authentication failed. Please try again.</string>
+    <string name="station_invalid_response">Invalid charging station response from server.</string>
+    <string name="station_session_expired">Your session has expired. Please sign in again.</string>
+
+
+    <!-- Home station discovery -->
+    <string name="home_browse_stations">Explore Charging Stations</string>
+    <string name="home_browse_stations_description">Browse charging stations and their locations.</string>
+    <string name="nav_stations_with_icon">⚡\nStations</string>
+
 </resources>

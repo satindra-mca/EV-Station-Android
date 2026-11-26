@@ -49,4 +49,7 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
+    // RecyclerView for displaying charging station lists efficiently
+    implementation(libs.recyclerview)
+
 }

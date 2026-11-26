@@ -252,7 +252,7 @@
             </LinearLayout>
 
 
-            <!-- Nearby Stations Header -->
+            <!-- Charging Stations Header -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -262,74 +262,84 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Nearby Stations"
+                    android:text="@string/station_list_title"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    android:textColor="#222222" />
+                    android:textColor="@color/ev_text_primary" />
 
                 <TextView
+                    android:id="@+id/tvViewAllStations"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View All"
-                    android:textColor="#149447"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:enabled="false"
+                    android:text="@string/view_all"
+                    android:textColor="@color/ev_secondary"
                     android:textStyle="bold"
                     android:textSize="13sp" />
 
             </LinearLayout>
 
-
-            <!-- Station Card -->
+            <!-- Charging station discovery card -->
             <LinearLayout
+                android:id="@+id/layoutBrowseStations"
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
+                android:layout_height="wrap_content"
+                android:minHeight="90dp"
                 android:orientation="horizontal"
-                android:padding="10dp"
-                android:background="@drawable/card_background">
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:background="@drawable/card_background"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:enabled="false">
 
-                <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/search_background" />
+                <TextView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:gravity="center"
+                    android:background="@drawable/circle_green"
+                    android:importantForAccessibility="no"
+                    android:text="&#9889;"
+                    android:textSize="24sp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:paddingStart="10dp">
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Tata Power Charging Station"
+                        android:text="@string/home_browse_stations"
+                        android:textColor="@color/ev_text_primary"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="500 m away"
-                        android:textColor="#159447"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/home_browse_stations_description"
+                        android:textColor="@color/ev_text_secondary"
                         android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Iscon Mega Mall, Ahmedabad"
-                        android:textSize="11sp"
-                        android:textColor="#777777" />
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Available"
-                    android:textColor="#159447"
-                    android:textSize="10sp"
-                    android:padding="6dp"
-                    android:background="@drawable/available_background" />
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:importantForAccessibility="no"
+                    android:src="@android:drawable/ic_media_next"
+                    app:tint="@color/ev_secondary" />
 
             </LinearLayout>
 
@@ -356,11 +366,17 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/navStations"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="⚡\nStations"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:enabled="false"
+            android:text="@string/nav_stations_with_icon"
+            android:textColor="@color/ev_text_primary"
             android:textSize="12sp" />
 
         <TextView

@@ -1,8 +1,10 @@
 package com.example.ev_station.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,12 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Authenticated USER dashboard.
+ *
+ * Handles session validation, charging station navigation
+ * and secure logout.
+ */
 public class HomeActivity extends AppCompatActivity {
 
     // Secure session management.
@@ -27,12 +35,22 @@ public class HomeActivity extends AppCompatActivity {
     private TextView tvUserGreeting;
     private ImageView ivMenu;
 
+    // Charging station navigation views.
+    private TextView tvViewAllStations;
+    private LinearLayout layoutBrowseStations;
+    private TextView navStations;
+
     // Prevent blocking the main UI thread.
     private final ExecutorService sessionExecutor =
             Executors.newSingleThreadExecutor();
 
-    // Prevent duplicate logout operations.
+    // Dashboard state.
     private boolean isLoggingOut = false;
+    private boolean isSessionValid = false;
+    private boolean isOpeningStations = false;
+
+    // Prevent outdated session validation results.
+    private int validationGeneration = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +66,12 @@ public class HomeActivity extends AppCompatActivity {
         initializeViews();
 
         setupListeners();
+
+        setDashboardActionsEnabled(false);
     }
 
     /**
-     * Initialize dashboard views.
+     * Initialize dashboard and navigation views.
      */
     private void initializeViews() {
 
@@ -60,15 +80,36 @@ public class HomeActivity extends AppCompatActivity {
 
         ivMenu =
                 findViewById(R.id.ivMenu);
+
+        tvViewAllStations =
+                findViewById(R.id.tvViewAllStations);
+
+        layoutBrowseStations =
+                findViewById(R.id.layoutBrowseStations);
+
+        navStations =
+                findViewById(R.id.navStations);
     }
 
     /**
-     * Configure dashboard menu.
+     * Configure dashboard menu and station navigation.
      */
     private void setupListeners() {
 
         ivMenu.setOnClickListener(
                 this::showHomeMenu
+        );
+
+        tvViewAllStations.setOnClickListener(
+                view -> openStationList()
+        );
+
+        layoutBrowseStations.setOnClickListener(
+                view -> openStationList()
+        );
+
+        navStations.setOnClickListener(
+                view -> openStationList()
         );
     }
 
@@ -81,10 +122,28 @@ public class HomeActivity extends AppCompatActivity {
 
         super.onResume();
 
+        isOpeningStations = false;
+
         if (!isLoggingOut) {
 
             validateSession();
         }
+    }
+
+    /**
+     * Disable dashboard actions while the activity
+     * is not in the foreground.
+     */
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+
+        validationGeneration++;
+
+        isSessionValid = false;
+
+        setDashboardActionsEnabled(false);
     }
 
     /**
@@ -93,7 +152,19 @@ public class HomeActivity extends AppCompatActivity {
      */
     private void validateSession() {
 
-        ivMenu.setEnabled(false);
+        if (isFinishing()
+                || isDestroyed()
+                || isLoggingOut) {
+
+            return;
+        }
+
+        isSessionValid = false;
+
+        setDashboardActionsEnabled(false);
+
+        final int currentGeneration =
+                ++validationGeneration;
 
         sessionExecutor.execute(() -> {
 
@@ -110,7 +181,9 @@ public class HomeActivity extends AppCompatActivity {
 
                 if (isFinishing()
                         || isDestroyed()
-                        || isLoggingOut) {
+                        || isLoggingOut
+                        || currentGeneration
+                        != validationGeneration) {
 
                     return;
                 }
@@ -124,6 +197,8 @@ public class HomeActivity extends AppCompatActivity {
                     return;
                 }
 
+                isSessionValid = true;
+
                 tvUserGreeting.setText(
                         getString(
                                 R.string.home_user_greeting,
@@ -131,9 +206,54 @@ public class HomeActivity extends AppCompatActivity {
                         )
                 );
 
-                ivMenu.setEnabled(true);
+                setDashboardActionsEnabled(true);
             });
         });
+    }
+
+    /**
+     * Enable or disable authenticated dashboard actions.
+     */
+    private void setDashboardActionsEnabled(
+            boolean enabled
+    ) {
+
+        ivMenu.setEnabled(enabled);
+
+        tvViewAllStations.setEnabled(enabled);
+
+        layoutBrowseStations.setEnabled(enabled);
+
+        navStations.setEnabled(enabled);
+    }
+
+    /**
+     * Open the charging station list.
+     *
+     * Prevent duplicate navigation and restrict access
+     * until the USER session has been validated.
+     */
+    private void openStationList() {
+
+        if (!isSessionValid
+                || isLoggingOut
+                || isOpeningStations
+                || isFinishing()
+                || isDestroyed()) {
+
+            return;
+        }
+
+        isOpeningStations = true;
+
+        setDashboardActionsEnabled(false);
+
+        Intent intent = new Intent(
+                HomeActivity.this,
+                StationListActivity.class
+        );
+
+        startActivity(intent);
     }
 
     /**
@@ -141,7 +261,10 @@ public class HomeActivity extends AppCompatActivity {
      */
     private void showHomeMenu(View anchor) {
 
-        if (isLoggingOut) {
+        if (!isSessionValid
+                || isLoggingOut
+                || isOpeningStations) {
+
             return;
         }
 
@@ -174,7 +297,10 @@ public class HomeActivity extends AppCompatActivity {
      */
     private void showLogoutConfirmation() {
 
-        if (isLoggingOut) {
+        if (!isSessionValid
+                || isLoggingOut
+                || isOpeningStations) {
+
             return;
         }
 
@@ -198,13 +324,21 @@ public class HomeActivity extends AppCompatActivity {
      */
     private void performLogout() {
 
-        if (isLoggingOut) {
+        if (isLoggingOut
+                || isOpeningStations
+                || isFinishing()
+                || isDestroyed()) {
+
             return;
         }
 
         isLoggingOut = true;
 
-        ivMenu.setEnabled(false);
+        isSessionValid = false;
+
+        validationGeneration++;
+
+        setDashboardActionsEnabled(false);
 
         sessionExecutor.execute(() -> {
 
@@ -250,6 +384,8 @@ public class HomeActivity extends AppCompatActivity {
      */
     @Override
     protected void onDestroy() {
+
+        validationGeneration++;
 
         sessionExecutor.shutdown();
 

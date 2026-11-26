@@ -33,6 +33,11 @@
             android:name=".activity.HomeActivity"
             android:exported="false" />
 
+        <!-- Station List Activity -->
+        <activity
+            android:name=".activity.StationListActivity"
+            android:exported="false" />
+
         <!-- Splash Activity -->
         <activity
             android:name=".activity.SplashActivity"
