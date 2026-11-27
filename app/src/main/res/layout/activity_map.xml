@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/ev_surface">
 
     <!-- Map screen toolbar -->
     <androidx.appcompat.widget.Toolbar
@@ -17,12 +20,117 @@
         app:navigationIcon="@drawable/ic_map_arrow_back"
         app:navigationIconTint="@android:color/white" />
 
-    <!-- Google Maps fragment -->
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/mapFragment"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <!-- Map and expandable station list -->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+        <!-- Google Maps fragment -->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/mapFragment"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- Expandable nearby station bottom sheet -->
+        <LinearLayout
+            android:id="@+id/nearbyBottomSheet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/ev_surface"
+            android:elevation="12dp"
+            android:clickable="true"
+            app:behavior_peekHeight="280dp"
+            app:behavior_hideable="false"
+            app:behavior_fitToContents="true"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+            <!-- Bottom sheet drag handle -->
+            <FrameLayout
+                android:id="@+id/nearbySheetHandle"
+                android:layout_width="match_parent"
+                android:layout_height="32dp">
+
+                <View
+                    android:layout_width="40dp"
+                    android:layout_height="4dp"
+                    android:layout_gravity="center"
+                    android:background="@color/ev_text_secondary" />
+
+            </FrameLayout>
+
+            <!-- Nearby stations header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nearby_stations_title"
+                    android:textColor="@color/ev_primary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvNearbyStationCount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/ev_text_secondary"
+                    android:textSize="13sp"
+                    tools:text="37 stations within 10 km" />
+
+            </LinearLayout>
+
+            <!-- Header divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/ev_border" />
+
+            <!-- Nearby stations loading indicator -->
+            <ProgressBar
+                android:id="@+id/nearbyProgressBar"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="16dp"
+                android:indeterminateTint="@color/ev_primary"
+                android:visibility="gone" />
+
+            <!-- Empty and error messages -->
+            <TextView
+                android:id="@+id/tvNearbyMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="20dp"
+                android:textColor="@color/ev_text_secondary"
+                android:textSize="14sp"
+                android:visibility="gone"
+                tools:text="No nearby charging stations found" />
+
+            <!-- Scrollable nearby station list -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvNearbyStations"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clipToPadding="false"
+                android:paddingTop="6dp"
+                android:paddingBottom="16dp"
+                android:nestedScrollingEnabled="true"
+                tools:listitem="@layout/item_nearby_station"/>
+
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </LinearLayout>

@@ -5,6 +5,10 @@
     <!-- Internet permission for REST API communication -->
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- Foreground location permissions for nearby station discovery -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"

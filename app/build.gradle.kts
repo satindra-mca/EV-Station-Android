@@ -71,4 +71,7 @@ dependencies {
 
     // Google Maps SDK for Android
     implementation(libs.google.maps)
+
+    // Fused Location Provider for foreground location
+    implementation(libs.google.location)
 }

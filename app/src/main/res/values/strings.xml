@@ -162,4 +162,28 @@
     <string name="nearby_stations_title">Nearby Stations</string>
     <string name="navigate_back">Navigate back</string>
 
+    <!-- Runtime location permission messages -->
+    <string name="location_permission_title">Location Permission</string>
+    <string name="location_permission_rationale">Allow location access to find nearby EV charging stations.</string>
+    <string name="location_permission_denied">Location permission denied. You can still browse the map manually.</string>
+    <string name="location_permission_settings_message">Enable location permission in app settings to find nearby charging stations.</string>
+    <string name="location_permission_allow">Allow</string>
+    <string name="location_permission_not_now">Not Now</string>
+    <string name="location_permission_open_settings">Open Settings</string>
+    <string name="location_access_unavailable">Unable to access your location.</string>
+
+    <!-- Current location retrieval messages -->
+    <string name="location_services_disabled">Please enable location services on your device.</string>
+    <string name="current_location_unavailable">Unable to determine your current location. Please try again.</string>
+    <string name="current_location_failed">Failed to retrieve your current location.</string>
+
+    <!--Nearby Station Card & RecyclerView Adapter -->
+    <string name="nearby_distance_format">%1$.1f km away (straight-line)</string>
+    <string name="nearby_station_count">%1$d stations within %2$.0f km</string>
+    <string name="nearby_directions">Directions</string>
+    <string name="nearby_view_details">View Details</string>
+    <string name="nearby_loading">Finding nearby charging stations…</string>
+    <string name="nearby_details_pending">Station details will be available soon.</string>
+    <string name="nearby_directions_unavailable">No application available to open directions.</string>
+
 </resources>
