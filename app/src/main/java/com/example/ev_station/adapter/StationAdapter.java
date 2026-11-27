@@ -28,6 +28,26 @@ public class StationAdapter
             new ArrayList<>();
 
     /**
+     * Listener for station selection.
+     */
+    public interface OnStationClickListener {
+
+        void onStationClick(ChargingStationResponse station);
+    }
+
+    private OnStationClickListener stationClickListener;
+
+    /**
+     * Registers the station selection callback.
+     */
+    public void setOnStationClickListener(
+            OnStationClickListener listener
+    ) {
+
+        this.stationClickListener = listener;
+    }
+
+    /**
      * Replaces the currently displayed station records.
      *
      * This method must be called on the main UI thread.
@@ -121,6 +141,38 @@ public class StationAdapter
                 station.getStatus(),
                 context
         );
+
+        // Enable navigation only for valid station IDs.
+        boolean selectable =
+                station.getId() != null
+                        && station.getId() > 0;
+
+        holder.itemView.setClickable(selectable);
+        holder.itemView.setFocusable(selectable);
+
+        holder.itemView.setOnClickListener(view -> {
+
+            int currentPosition =
+                    holder.getBindingAdapterPosition();
+
+            if (currentPosition == RecyclerView.NO_POSITION) {
+                return;
+            }
+
+            ChargingStationResponse selectedStation =
+                    stationList.get(currentPosition);
+
+            if (stationClickListener != null
+                    && selectedStation.getId() != null
+                    && selectedStation.getId() > 0) {
+
+                stationClickListener.onStationClick(
+                        selectedStation
+                );
+            }
+        });
+
+        holder.itemView.setClickable(selectable);
     }
 
     @Override

@@ -47,6 +47,16 @@
             android:name=".activity.StationListActivity"
             android:exported="false" />
 
+        <!-- Station Details Activity -->
+        <activity
+            android:name=".activity.StationDetailsActivity"
+            android:exported="false" />
+
+        <!-- ConnectorSelector Activity -->
+        <activity
+            android:name=".activity.ConnectorSelectionActivity"
+            android:exported="false" />
+
         <!-- Google Maps Activity -->
         <activity
             android:name=".activity.MapActivity"

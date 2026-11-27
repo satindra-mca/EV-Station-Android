@@ -353,6 +353,26 @@ public class MapActivity extends AppCompatActivity
 
         this.googleMap = googleMap;
 
+        // Open station details when a station marker is selected.
+        googleMap.setOnMarkerClickListener(marker -> {
+
+            Object tag = marker.getTag();
+
+            if (!(tag instanceof Long)) {
+                return false;
+            }
+
+            long stationId = (Long) tag;
+
+            if (!canAccessLocation() || stationId <= 0) {
+                return false;
+            }
+
+            navigateToStationDetails(stationId);
+
+            return true;
+        });
+
         // Display Surat as the default map location.
         LatLng surat = new LatLng(21.1702, 72.8311);
 
@@ -1457,29 +1477,35 @@ public class MapActivity extends AppCompatActivity
         }
     }
 
-    // Handle station details selection.
+    /**
+     * Opens details for a station selected from the nearby list.
+     */
     private void openStationDetails(
             ChargingStationResponse station
     ) {
 
-        if (!canAccessLocation()
-                || station == null
-                || station.getId() == null) {
+        if (station == null || station.getId() == null) {
             return;
         }
 
-        Log.d(
-                TAG,
-                "Selected station ID: " + station.getId()
+        navigateToStationDetails(station.getId());
+    }
+
+    /**
+     * Shared navigation for nearby stations and map markers.
+     */
+    private void navigateToStationDetails(long stationId) {
+
+        if (!canAccessLocation() || stationId <= 0) {
+            return;
+        }
+
+        startActivity(
+                StationDetailsActivity.createIntent(
+                        this,
+                        stationId
+                )
         );
-
-        Toast.makeText(
-                this,
-                R.string.nearby_details_pending,
-                Toast.LENGTH_SHORT
-        ).show();
-
-        // StationDetailsActivity navigation will be added in Phase 5.
     }
 
     @Override

@@ -186,4 +186,38 @@
     <string name="nearby_details_pending">Station details will be available soon.</string>
     <string name="nearby_directions_unavailable">No application available to open directions.</string>
 
+    <!-- Phase 5: Station Details -->
+    <string name="station_details_title">Station Details</string>
+    <string name="station_details_back">Back to stations</string>
+    <string name="station_details_loading">Loading station details…</string>
+    <string name="station_details_chargers">Chargers</string>
+    <string name="station_details_empty">No chargers found at this station</string>
+    <string name="station_details_error">Unable to load station details</string>
+    <string name="station_details_not_found">Station not found</string>
+    <string name="station_details_invalid_id">Invalid station ID</string>
+    <string name="station_details_unknown">Not available</string>
+
+    <!-- Charger information -->
+    <string name="charger_select">Select Charger</string>
+    <string name="charger_power_format">Power: %1$s</string>
+    <string name="charger_connector_rating_format">Connector rating: %1$s</string>
+    <string name="charger_connector_count_format">Connectors: %1$d</string>
+    <string name="charger_price_format">₹%1$s/kWh</string>
+    <string name="charger_price_unavailable">Price unavailable</string>
+    <string name="charger_selected_format">Selected charger: %1$s</string>
+
+    <!-- Phase 5: Connector Selection -->
+    <string name="connector_selection_title">Select Connector</string>
+    <string name="connector_selection_back">Back to station details</string>
+    <string name="connector_loading">Loading connectors…</string>
+    <string name="connector_empty">No connectors found</string>
+    <string name="connector_load_error">Unable to load connectors</string>
+    <string name="connector_invalid_selection">Invalid station or charger</string>
+    <string name="connector_not_found">Charger not found</string>
+    <string name="connector_number_format">Connector %1$d</string>
+    <string name="connector_status_format">Status: %1$s</string>
+    <string name="connector_select">Select Connector</string>
+    <string name="connector_availability_note">Time slot availability is checked separately.</string>
+    <string name="connector_selected_format">Connector %1$d selected</string>
+
 </resources>

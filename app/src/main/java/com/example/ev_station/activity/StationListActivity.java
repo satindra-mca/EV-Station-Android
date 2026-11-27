@@ -138,11 +138,40 @@ public class StationListActivity extends AppCompatActivity {
 
         stationAdapter = new StationAdapter();
 
+        stationAdapter.setOnStationClickListener(
+                this::openStationDetails
+        );
+
         rvStations.setLayoutManager(
                 new LinearLayoutManager(this)
         );
 
         rvStations.setAdapter(stationAdapter);
+    }
+
+    /**
+     * Opens details for the selected charging station.
+     */
+    private void openStationDetails(
+            ChargingStationResponse station
+    ) {
+
+        if (!isActivityAvailable()
+                || requestInProgress
+                || !stationsLoaded
+                || station == null
+                || station.getId() == null
+                || station.getId() <= 0) {
+
+            return;
+        }
+
+        startActivity(
+                StationDetailsActivity.createIntent(
+                        this,
+                        station.getId()
+                )
+        );
     }
 
     /**
