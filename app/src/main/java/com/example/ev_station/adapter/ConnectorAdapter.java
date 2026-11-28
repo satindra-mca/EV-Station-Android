@@ -164,6 +164,10 @@ public class ConnectorAdapter extends
         });
     }
 
+    /**
+     * Allows connectors with supported statuses
+     * to be selected for future slot booking.
+     */
     private boolean isSelectable(
             ConnectorResponse connector
     ) {
@@ -173,8 +177,13 @@ public class ConnectorAdapter extends
                 && connector.getId() > 0
                 && connector.getConnectorNumber() != null
                 && connector.getConnectorNumber() > 0
-                && "AVAILABLE".equalsIgnoreCase(
-                connector.getStatus()
+                && (
+                "AVAILABLE".equalsIgnoreCase(
+                        connector.getStatus()
+                )
+                        || "OCCUPIED".equalsIgnoreCase(
+                        connector.getStatus()
+                )
         );
     }
 

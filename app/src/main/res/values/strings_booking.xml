@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Booking screen -->
+    <string name="booking_title">Book Charging Slot</string>
+    <string name="booking_back">Go back</string>
+    <string name="booking_station_details">Charging Station Details</string>
+    <string name="booking_slot_details">Select Booking Slot</string>
+    <string name="booking_summary">Booking Summary</string>
+
+    <!-- Booking selection -->
+    <string name="booking_select_date">Select Date</string>
+    <string name="booking_start_time">Start Time</string>
+    <string name="booking_end_time">End Time</string>
+    <string name="booking_check_availability">Check Availability</string>
+    <string name="booking_proceed">Proceed to Booking</string>
+
+    <!-- Booking rules -->
+    <string name="booking_minimum_duration">Minimum booking duration: 30 minutes</string>
+    <string name="booking_buffer_note">A 15-minute transition buffer applies between bookings.</string>
+
+    <!-- Booking details -->
+    <string name="booking_station_placeholder">Station details pending</string>
+    <string name="booking_charger_placeholder">Charger details pending</string>
+    <string name="booking_connector_placeholder">Connector details pending</string>
+    <string name="booking_price_placeholder">Price per kWh: —</string>
+
+    <!-- Booking summary -->
+    <string name="booking_duration_placeholder">Duration: —</string>
+    <string name="booking_energy_placeholder">Estimated energy: —</string>
+    <string name="booking_amount_placeholder">Estimated amount: —</string>
+    <string name="booking_advance_placeholder">Advance payment (20%): —</string>
+
+    <!-- Booking messages -->
+    <string name="booking_invalid_selection">Invalid station, charger or connector selection.</string>
+    <string name="booking_loading">Loading booking details...</string>
+
+    <!-- Date and time validation -->
+    <string name="booking_date_required">Please select a booking date.</string>
+    <string name="booking_start_required">Please select a start time.</string>
+    <string name="booking_end_required">Please select an end time.</string>
+    <string name="booking_start_future">Booking start time must be in the future.</string>
+    <string name="booking_end_after_start">End time must be after start time.</string>
+    <string name="booking_duration_invalid">Minimum booking duration is 30 minutes.</string>
+    <string name="booking_slot_valid">Selected slot duration: %1$d minutes</string>
+    <string name="booking_preview_pending">Slot selected. Availability verification is pending.</string>
+
+    <!-- Booking details integration -->
+    <string name="booking_details_load_error">Unable to load booking details.</string>
+    <string name="booking_details_network_error">Network error. Please check your connection.</string>
+    <string name="booking_details_mismatch">Selected station, charger or connector does not match.</string>
+    <string name="booking_details_retry">Retry</string>
+    <string name="booking_session_expired">Your session has expired. Please login again.</string>
+    <string name="booking_access_denied">You are not allowed to access this booking screen.</string>
+    <string name="booking_unknown">Not available</string>
+    <string name="booking_charger_format">Charger: %1$s</string>
+    <string name="booking_connector_format">Connector #%1$d</string>
+    <string name="booking_connector_status_format">Connector #%1$d | Current status: %2$s</string>
+    <string name="booking_price_format">Price per kWh: ₹%1$s</string>
+
+    <!-- Booking preview API -->
+    <string name="booking_preview_loading">Checking slot availability...</string>
+    <string name="booking_preview_available">Selected slot is available.</string>
+    <string name="booking_preview_unavailable">Selected slot is unavailable. Please select another time.</string>
+    <string name="booking_preview_error">Unable to check slot availability. Please try again.</string>
+    <string name="booking_preview_invalid">Invalid booking preview response.</string>
+    <string name="booking_duration_format">Duration: %1$d minutes</string>
+    <string name="booking_energy_format">Estimated energy: %1$s kWh</string>
+    <string name="booking_amount_format">Estimated amount: ₹%1$s</string>
+    <string name="booking_advance_format">Advance payment (20%%): ₹%1$s</string>
+    <string name="booking_creation_pending">Booking creation will be available in the next step.</string>
+
+</resources>

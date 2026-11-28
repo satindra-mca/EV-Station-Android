@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="booking_create_title">Confirm booking</string>
+    <string name="booking_create_confirm">Create a pending reservation? Estimated advance: ₹%1$s. No payment will be collected now.</string>
+    <string name="booking_create_action">Create booking</string>
+    <string name="booking_create_loading">Creating booking…</string>
+    <string name="booking_create_rejected">Booking could not be created. Check availability again.</string>
+    <string name="booking_create_uncertain">Booking outcome could not be verified. Do not submit again until you check your booking history or ask the administrator to verify it.</string>
+    <string name="booking_create_success">Booking #%1$d created.</string>
+    <string name="booking_create_success_title">Booking created</string>
+    <string name="booking_create_result">Booking ID: %1$d\nEstimated amount: ₹%2$s\nAdvance amount: ₹%3$s\nBooking status: %4$s\nPayment status: %5$s\nPayment expires at: %6$s\n\nPayment has not been collected.</string>
+</resources>

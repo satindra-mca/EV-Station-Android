@@ -513,9 +513,7 @@ public class ConnectorSelectionActivity extends AppCompatActivity {
     }
 
     /**
-     * Handles connector selection.
-     *
-     * Slot booking navigation will be implemented in Phase 6.
+     * Opens the booking screen for a valid connector.
      */
     private void onConnectorSelected(
             ConnectorResponse connector
@@ -530,22 +528,30 @@ public class ConnectorSelectionActivity extends AppCompatActivity {
                 || connector.getChargerId() == null
                 || connector.getChargerId() != chargerId
                 || connector.getConnectorNumber() == null
-                || connector.getConnectorNumber() <= 0
-                || !"AVAILABLE".equalsIgnoreCase(
-                connector.getStatus()
-        )) {
+                || connector.getConnectorNumber() <= 0) {
 
             return;
         }
 
-        Toast.makeText(
-                this,
-                getString(
-                        R.string.connector_selected_format,
-                        connector.getConnectorNumber()
-                ),
-                Toast.LENGTH_SHORT
-        ).show();
+        String status = connector.getStatus();
+
+        boolean supportedStatus =
+                "AVAILABLE".equalsIgnoreCase(status)
+                        || "OCCUPIED".equalsIgnoreCase(status);
+
+        if (!supportedStatus) {
+
+            return;
+        }
+
+        startActivity(
+                SlotBookingActivity.createIntent(
+                        this,
+                        stationId,
+                        chargerId,
+                        connector.getId()
+                )
+        );
     }
 
     /**

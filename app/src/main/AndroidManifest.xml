@@ -57,6 +57,11 @@
             android:name=".activity.ConnectorSelectionActivity"
             android:exported="false" />
 
+        <!-- Slot Booking Activity -->
+        <activity
+            android:name=".activity.SlotBookingActivity"
+            android:exported="false" />
+
         <!-- Google Maps Activity -->
         <activity
             android:name=".activity.MapActivity"
